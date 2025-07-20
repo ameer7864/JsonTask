@@ -2,7 +2,6 @@ function addData() {
     var username = document.getElementById("username");
     var message = document.getElementById("message");
     postData(username, message);
-
 }
 
 function postData(username, message) {
@@ -38,7 +37,8 @@ function postData(username, message) {
 }
 
 function displayData() {
-    var container = document.getElementById("container");
+var container = document.getElementById("container");
+    container.innerHTML='';
     fetch("https://sample-json-curd-data.onrender.com/users")
         .then(res => res.json())
         .then(data => {
