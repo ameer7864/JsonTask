@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "23e4",
+      "username": "Ameer",
+      "message": "Never give up"
+    },
+    {
+      "id": "70aa",
+      "username": "Sameer",
+      "message": "Do or Die"
+    },
+    {
+      "id": "2616",
+      "username": "Prasad",
+      "message": "Arise!!"
+    },
+    {
+      "id": "1553",
+      "username": "Mani",
+      "message": "Good Job"
+    },
+    {
+      "id": "5392",
+      "username": "Kiran",
+      "message": "Rasengann!!"
+    },
+    {
+      "id": "ef8a",
+      "username": "Simhadri",
+      "message": "Just Chill bro"
+    }
+  ]
+}
