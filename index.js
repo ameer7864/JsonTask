@@ -1,3 +1,5 @@
+var container = document.getElementById("container");
+
 function addData() {
     var username = document.getElementById("username");
     var message = document.getElementById("message");
@@ -6,7 +8,7 @@ function addData() {
 
 function postData(username, message) {
     if (username.value == "" || message.value == "") {
-        alert("enter username or message");
+        alert("Enter username or message properly");
     }
     else {
         var url = "https://sample-json-curd-data.onrender.com/users";
@@ -21,49 +23,46 @@ function postData(username, message) {
             })
         }
         fetch(url, options)
-            .then(response => {
-                if (response.ok) {
-                    alert("Data Added Successfully...");
+            .then(res => {
+                if (res.ok) {
+                    alert("Data added Successfully");
                     displayData();
-                    username.value = ""
-                    message.value = ""
                 }
-            })
-            .catch(err => {
-                alert("Something went wrong");
-                console.error(err);
             })
     }
 }
 
-function displayData() {
-var container = document.getElementById("container");
-    container.innerHTML='';
+function displayData(){
+    container.innerHTML = '';
     fetch("https://sample-json-curd-data.onrender.com/users")
         .then(res => res.json())
         .then(data => {
-            for (var obj of data) {
-                var item = document.createElement("div"); //<div> </div>
-                item.className = "item text-uppercase fs-5 border border-3 border-warning rounded rounded-2 my-2 p-3";                    //<div class="item" > </div>
-                var usernamePara = document.createElement("p");//<p> </p>
-                var messagePara = document.createElement("p"); //<p> </p>
+            for(var obj of data){
+                var element = document.createElement("div");
+                element.className = "element d-flex";
+                element.innerHTML = `
+                    <div class='item border border-3 border-warning p-2 m-2 rounded rounded-3 text-uppercase fs-5'>
+                        <p>${obj.message}</p>
+                        <p>${obj.username}</p>
+                    </div>
+                    <button class='btn btn-close' onclick=deleteData('${obj.id}')></button>
+                `
+                container.appendChild(element);
 
-                //adding data into paragraph
-                var { username, message } = obj;
-                usernamePara.innerText = username; //<p> Ameer </p>
-                messagePara.innerText = message;   //<p> Never give up </p>
-
-                //adding paragraphs into item <div class = "item"> </div>
-                item.appendChild(messagePara);
-                item.appendChild(usernamePara);
-                /**
-                 * <div class="item">
-                 *      <p>Never give up</p>
-                 *      <p>Ameer</p>
-                 * </div>
-                 */
-                container.appendChild(item);
             }
         })
 }
 displayData();
+
+function deleteData(id){
+    var options = {
+        "method" : "DELETE"
+    }
+    fetch(`https://sample-json-curd-data.onrender.com/users/${id}`,options)
+        .then(response => {
+            if(response.ok){
+                alert("Data Deleted Successfully");
+                displayData();
+            }
+        })
+}
