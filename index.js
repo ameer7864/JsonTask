@@ -27,6 +27,8 @@ function postData(username, message) {
                 if (res.ok) {
                     alert("Data added Successfully");
                     displayData();
+                    username.value = '';
+                    message.value = '';
                 }
             })
     }
